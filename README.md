@@ -34,7 +34,7 @@ FORMAT A:
   |----<filename for image for digit n+m+k+p>.png
   |----<filename for label for digit n+m+k+p>.txt
 ```
-<p align="center">Figure 1: Directory structure for folder `FORMAT A`</p>
+<p align="center">Figure 1: Directory structure for folder <tt>FORMAT A</tt></p>
 
 Where <img src="http://www.sciweavers.org/tex2img.php?eq=n%2Cm%2CL%2Ck%2Cp%20%5Cin%20%20%5Cmathbb%7BN%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="n,m,L,k,p \in  \mathbb{N}" width="208" height="19" />.
 
