@@ -34,7 +34,7 @@ FORMAT A:
   |----<filename for label for digit n+m+k+p>.txt
 ```
 
-Where <div style="width:100px; overflow:hidden; display:inline-block;"><img src="http://www.sciweavers.org/tex2img.php?eq=n%2Cm%2Ck%2Cp%20%5Cin%20%20%5Cmathbb%7BN%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="n,m,k,p \in  \mathbb{N}" width="207" height="19" /></div>
+Where <img src="http://www.sciweavers.org/tex2img.php?eq=n%2Cm%2Ck%2Cp%20%5Cin%20%20%5Cmathbb%7BN%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="n,m,k,p \in  \mathbb{N}" width="207" height="19" />
 
 This repo will store the Terraform setup scripts to load the data into the following S3 destinations:
 
