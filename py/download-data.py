@@ -3,7 +3,7 @@
 # the file should be placed in the `<root>/data/<file here with OG filename>`
 # where <root> is the root of this repo
 
-impot os
+import os
 import sys
 import json
 import requests
