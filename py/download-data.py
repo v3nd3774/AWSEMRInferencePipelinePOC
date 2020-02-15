@@ -5,18 +5,17 @@ import requests
 from pathlib import Path
 
 if __name__=="__main__":
-  arg = sys.argv[-1]
+  arg = "".join(sys.stdin.readlines())
   input_dict = json.loads(arg)
   uri = input_dict["uri"]
   filename = uri.split("/")[-1]
-  
-  curr = Path(os.getcwd())
-  par = Path(curr.parent).parent
-  data_dir = os.path.join(par, "data")
-  
+
+  curr = os.getcwd()
+  data_dir = os.path.join(curr, "data")
+
   fpath = os.path.join(data_dir, filename)
   with open(fpath, "wb") as f:
-      r = requests.get(url)
+      r = requests.get(uri)
       f.write(r.content)
-      
-  print(fpath)
+
+  print(json.dumps({"fpath": fpath}))
