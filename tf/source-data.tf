@@ -4,6 +4,7 @@ locals {
   projprefix = "AWSEMRInferencePipelinePOC"
 }
 locals {
+  runscriptcommand = ["python", local.script]
   bucketname = "${local.projprefix}_Source"
   filename1 = "${local.uriprefix}train-images-idx3-ubyte.gz"
   filename2 = "${local.uriprefix}train-labels-idx1-ubyte.gz"
@@ -21,25 +22,25 @@ resource "aws_s3_bucket" "source" {
 }
 
 data "external" "downloadmnist1" {
-  program = ["python", local.script]
+  program = local.runscriptcommand
   query = {
     uri = local.filename1
   }
 }
 data "external" "downloadmnist2" {
-  program = ["python", local.script]
+  program = local.runscriptcommand
   query = {
     uri = local.filename2
   }
 }
 data "external" "downloadmnist3" {
-  program = ["python", local.script]
+  program = local.runscriptcommand
   query = {
     uri = local.filename3
   }
 }
 data "external" "downloadmnist4" {
-  program = ["python", local.script]
+  program = local.runscriptcommand
   query = {
     uri = local.filename4
   }
