@@ -65,3 +65,7 @@ Tech Catalyst: Terraform                         ---------▶ EMR ◀---------
 The repo contains the Terraform code to initialize each node in Figure 2 that is reachable from Terraform.
 
 After this is complete, I will add code to connect nodes 1 and 2 in the computational DAG from the EMR cluster.
+
+Learnings:
+
+  1. You can download external files to work with in the Terraform script as described [here](https://stackoverflow.com/questions/45317910/how-to-download-a-file-from-github-enterprise-using-terraform).
