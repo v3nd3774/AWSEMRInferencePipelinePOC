@@ -1,24 +1,24 @@
 locals {
   uriprefix = "http://yann.lecun.com/exdb/mnist/"
   script = "${dirname(dirname(path.module))}/py/download-data.py"
-  projprefix = "AWSEMRInferencePipelinePOC"
 }
 locals {
   runscriptcommand = ["python", local.script]
-  bucketname = lower("${local.projprefix}-Source")
+  bucketname = lower("${var.projprefix}-Source")
   filename1 = "${local.uriprefix}train-images-idx3-ubyte.gz"
   filename2 = "${local.uriprefix}train-labels-idx1-ubyte.gz"
   filename3 = "${local.uriprefix}t10k-images-idx3-ubyte.gz"
   filename4 = "${local.uriprefix}t10k-labels-idx1-ubyte.gz"
-  tags = {
-    Project = local.projprefix
-  }
 }
 
 resource "aws_s3_bucket" "source" {
   bucket = local.bucketname
   acl    = "private"
-  tags = local.tags
+  tags = var.tags
+}
+
+output "source_data_bucket" {
+  value = aws_s3_bucket.source.bucket
 }
 
 data "external" "downloadmnist1" {
@@ -58,7 +58,7 @@ resource "aws_s3_bucket_object" "mnist1" {
   key    = basename(local.source1)
   source = local.source1
   etag = filemd5(local.source1)
-  tags = local.tags
+  tags = var.tags
 }
 
 resource "aws_s3_bucket_object" "mnist2" {
@@ -66,7 +66,7 @@ resource "aws_s3_bucket_object" "mnist2" {
   key    = basename(local.source2)
   source = local.source2
   etag = filemd5(local.source2)
-  tags = local.tags
+  tags = var.tags
 }
 
 resource "aws_s3_bucket_object" "mnist3" {
@@ -74,7 +74,7 @@ resource "aws_s3_bucket_object" "mnist3" {
   key    = basename(local.source3)
   source = local.source3
   etag = filemd5(local.source3)
-  tags = local.tags
+  tags = var.tags
 }
 
 resource "aws_s3_bucket_object" "mnist4" {
@@ -82,5 +82,5 @@ resource "aws_s3_bucket_object" "mnist4" {
   key    = basename(local.source4)
   source = local.source4
   etag = filemd5(local.source4)
-  tags = local.tags
+  tags = var.tags
 }
