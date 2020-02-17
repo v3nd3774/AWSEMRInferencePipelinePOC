@@ -67,6 +67,13 @@ resource "aws_security_group" "emr_master" {
   vpc_id                 = aws_vpc.emr.id
   revoke_rules_on_delete = true
 
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks     = ["0.0.0.0/0"]
+  }
+
   tags = merge(var.tags, {
     Name = "sgMaster"
   })
@@ -120,7 +127,7 @@ resource "aws_emr_cluster" "cluster" {
   }
 
   master_instance_group {
-    instance_type  = "m3.xlarge"
+    instance_type  = "m4.large"
     instance_count = 1
     ebs_config {
       size = "8"
@@ -129,7 +136,7 @@ resource "aws_emr_cluster" "cluster" {
     }
   }
   core_instance_group {
-    instance_type  = "m3.xlarge"
+    instance_type  = "m4.large"
     instance_count = "1"
     bid_price      = "0.30"
     ebs_config {
