@@ -69,3 +69,4 @@ After this is complete, I will add code to connect nodes 1 and 2 in the computat
 Learnings:
 
   1. You can download external files to work with in the Terraform script as described [here](https://stackoverflow.com/questions/45317910/how-to-download-a-file-from-github-enterprise-using-terraform).
+  2. You need to use an internet gateway for the nodes, not doing this will prevent the cluster from turning on. More info [here](https://aws.amazon.com/blogs/big-data/launching-and-running-an-amazon-emr-cluster-inside-a-vpc/).
