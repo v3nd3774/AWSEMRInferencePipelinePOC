@@ -78,7 +78,6 @@ resource "aws_security_group" "emr_master" {
     Name = "sgMaster"
   })
 }
-
 resource "aws_security_group" "emr_slave" {
   vpc_id                 = aws_vpc.emr.id
   revoke_rules_on_delete = true
@@ -86,6 +85,22 @@ resource "aws_security_group" "emr_slave" {
   tags = merge(var.tags, {
     Name = "sgSlave"
   })
+}
+resource "aws_security_group_rule" "emr_master_comms" {
+  type            = "ingress"
+  from_port       = -1
+  to_port         = -1
+  protocol        = "-1"
+  source_security_group_id = aws_security_group.emr_slave.id
+  security_group_id = aws_security_group.emr_master.id
+}
+resource "aws_security_group_rule" "emr_slave_comms" {
+  type            = "ingress"
+  from_port       = -1
+  to_port         = -1
+  protocol        = "-1"
+  source_security_group_id = aws_security_group.emr_master.id
+  security_group_id = aws_security_group.emr_slave.id
 }
 
 #
@@ -137,7 +152,7 @@ resource "aws_emr_cluster" "cluster" {
   }
   core_instance_group {
     instance_type  = "m4.large"
-    instance_count = "1"
+    instance_count = 1
     bid_price      = "0.30"
     ebs_config {
       size = "8"

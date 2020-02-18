@@ -3,7 +3,7 @@ variable "environment" {
 }
 
 variable "release_label" {
-  default = "emr-5.8.0"
+  default = "emr-5.29.0"
 }
 
 variable "applications" {

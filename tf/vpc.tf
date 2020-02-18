@@ -9,6 +9,15 @@ resource "aws_vpc" "emr" {
   assign_generated_ipv6_cidr_block = true
   tags = var.tags
 }
+resource "aws_vpc_dhcp_options" "emr_dns" {
+  domain_name_servers = [ "AmazonProvidedDNS" ]
+  domain_name = "ec2.internal"
+  tags = var.tags
+}
+resource "aws_vpc_dhcp_options_association" "emr_dns_attachment" {
+  vpc_id          = aws_vpc.emr.id
+  dhcp_options_id = aws_vpc_dhcp_options.emr_dns.id
+}
 resource "aws_internet_gateway" "emr" {
   vpc_id = aws_vpc.emr.id
   tags = var.tags
